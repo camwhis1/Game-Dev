@@ -5,20 +5,22 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Animator anim;
-    public float playerSpeed = 2;
+    Rigidbody2D rigidbody;
+    public float playerSpeed = 0.1f;
 
     void Start()
     {
         anim = GetComponent<Animator> ();
+        rigidbody = GetComponent<Rigidbody2D>();
     }
     
     void Update()
     {
         float x = Input.GetAxis("DiscreteHorizontal");
         float y = Input.GetAxis("DiscreteVertical");
-        transform.Translate(x * playerSpeed * Time.deltaTime, 0f, 0f);
+        
+        rigidbody.MovePosition(rigidbody.position + Vector2.right * x * playerSpeed + Vector2.up * y * playerSpeed);
         anim.SetFloat("XSpeed", x);
-        transform.Translate(0f, y * playerSpeed * Time.deltaTime, 0f);
         anim.SetFloat("YSpeed", y);
     }
 }
