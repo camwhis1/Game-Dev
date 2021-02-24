@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float playerSpeed = 0.015f;
+    Animator anim;
+    public float playerSpeed = 2;
+
+    void Start()
+    {
+        anim = GetComponent<Animator> ();
+    }
     
     void Update()
     {
-        transform.Translate(Input.GetAxis("DiscreteHorizontal") * playerSpeed, 0f, 0f);
-        transform.Translate(0f, Input.GetAxis("DiscreteVertical") * playerSpeed, 0f);
+        float x = Input.GetAxis("DiscreteHorizontal");
+        float y = Input.GetAxis("DiscreteVertical");
+        transform.Translate(x * playerSpeed * Time.deltaTime, 0f, 0f);
+        anim.SetFloat("XSpeed", x);
+        transform.Translate(0f, y * playerSpeed * Time.deltaTime, 0f);
+        anim.SetFloat("YSpeed", y);
     }
 }
