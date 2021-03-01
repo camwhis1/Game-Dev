@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    GameObject gameObject;
-    GameManager gm;
     Animator anim;
     Rigidbody2D rigidbody;
     public float playerSpeed = 0.1f;
 
     void Start()
     {
-        //gameObject = GetComponent<GameObject>();
-        gm = GetComponent<GameManager>();
         anim = GetComponent<Animator> ();
         rigidbody = GetComponent<Rigidbody2D>();
     }
@@ -27,15 +23,4 @@ public class Player : MonoBehaviour
         anim.SetFloat("XSpeed", x);
         anim.SetFloat("YSpeed", y);
     }
-
-    void OnTriggerEnter2D(Collider2D item)
-    {
-         if(item.CompareTag("Food"))
-         {
-            Destroy(item.gameObject);
-            var objectSetTriger = item.gameObject;
-            gm.AddScore();
-         }
-    }
-
 }

@@ -19130,16 +19130,16 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 12
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 2
     m_AlignByGeometry: 0
-    m_RichText: 0
+    m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 0/5 Food
 --- !u!222 &116405591
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19148,49 +19148,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116405588}
   m_CullTransparentMesh: 0
---- !u!1 &133669957
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 133669958}
-  - component: {fileID: 133669959}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &133669958
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133669957}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4718838, y: 1.390241, z: -96.24199}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &133669959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 133669957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a98dbb284b38904fbd058afe9a1effc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &224702474
 GameObject:
   m_ObjectHideFlags: 0
@@ -19275,9 +19232,9 @@ GameObject:
   m_Component:
   - component: {fileID: 282675957}
   - component: {fileID: 282675956}
-  - component: {fileID: 282675958}
   - component: {fileID: 282675955}
   - component: {fileID: 282675954}
+  - component: {fileID: 282675959}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Food
@@ -19304,7 +19261,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &282675955
 BoxCollider2D:
@@ -19394,9 +19351,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &282675958
+--- !u!114 &282675959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19405,9 +19362,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 282675953}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7b3d8a183882cd41bf6b1ae68b84d08, type: 3}
+  m_Script: {fileID: 11500000, guid: f986cc488925c474a9a0ed28ba16588d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: {fileID: 116405588}
+  playerScore: 0
+  sound: {fileID: 0}
+  toBeCollected: 5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -19489,7 +19450,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &740920060
 GameObject:
@@ -28996,7 +28957,7 @@ RectTransform:
   - {fileID: 116405589}
   - {fileID: 55700071}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -29015,6 +28976,7 @@ GameObject:
   - component: {fileID: 948019835}
   - component: {fileID: 948019834}
   - component: {fileID: 948019833}
+  - component: {fileID: 948019837}
   m_Layer: 0
   m_Name: Fish (2)
   m_TagString: Food
@@ -29041,7 +29003,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &948019834
 BoxCollider2D:
@@ -29131,8 +29093,24 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &948019837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948019832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f986cc488925c474a9a0ed28ba16588d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 116405588}
+  playerScore: 0
+  sound: {fileID: 0}
+  toBeCollected: 5
 --- !u!1 &1127937545
 GameObject:
   m_ObjectHideFlags: 0
@@ -29166,7 +29144,7 @@ Transform:
   - {fileID: 1991935827}
   - {fileID: 1993799075}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1209969609
 GameObject:
@@ -48698,7 +48676,7 @@ Transform:
   - {fileID: 17128675}
   - {fileID: 740920061}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1289720228
 PrefabInstance:
@@ -48928,7 +48906,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1763409650 stripped
 Transform:
@@ -49038,7 +49016,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1791571738
 MonoBehaviour:
@@ -49282,6 +49260,7 @@ GameObject:
   - component: {fileID: 2022342696}
   - component: {fileID: 2022342695}
   - component: {fileID: 2022342694}
+  - component: {fileID: 2022342698}
   m_Layer: 0
   m_Name: Fish (1)
   m_TagString: Food
@@ -49308,7 +49287,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &2022342695
 BoxCollider2D:
@@ -49398,8 +49377,24 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2022342698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022342693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f986cc488925c474a9a0ed28ba16588d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 116405588}
+  playerScore: 0
+  sound: {fileID: 0}
+  toBeCollected: 5
 --- !u!4 &2102484713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3649939857888339485, guid: 6a076750a1e93d548927d7c47ac07e6d,
