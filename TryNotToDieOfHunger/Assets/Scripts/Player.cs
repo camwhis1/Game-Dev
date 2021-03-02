@@ -7,6 +7,12 @@ public class Player : MonoBehaviour
     Animator anim;
     Rigidbody2D rigidbody;
     public float playerSpeed = 0.1f;
+    public bool isOnIce = false;
+
+    public float iceFriction = 0.0001f;
+
+    float iceSpeedX = 0;
+    float iceSpeedY = 0;
 
     void Start()
     {
@@ -16,11 +22,62 @@ public class Player : MonoBehaviour
     
     void Update()
     {
+        anim.speed = isOnIce ? 3 : 1;
+
         float x = Input.GetAxis("DiscreteHorizontal");
         float y = Input.GetAxis("DiscreteVertical");
-        
-        rigidbody.MovePosition(rigidbody.position + Vector2.right * x * playerSpeed + Vector2.up * y * playerSpeed);
         anim.SetFloat("XSpeed", x);
         anim.SetFloat("YSpeed", y);
+
+        if (!isOnIce)
+        {
+            iceSpeedX = 0;
+            iceSpeedY = 0;   
+            rigidbody.MovePosition(rigidbody.position + Vector2.right * x * playerSpeed + Vector2.up * y * playerSpeed);
+        }
+        else
+        {
+            if (Mathf.Abs(x) < 0.5)
+            {
+                if (iceSpeedX > iceFriction)
+                {
+                    iceSpeedX -= iceFriction;
+                }
+                else if (iceSpeedX < iceFriction * -1)
+                {
+                    iceSpeedX += iceFriction;
+                }
+                else
+                {
+                    iceSpeedX = 0;
+                }
+            }
+            else if (Mathf.Abs(iceSpeedX) < playerSpeed)
+            {
+                iceSpeedX += x * iceFriction;
+            }
+
+            if (Mathf.Abs(y) < 0.5)
+            {
+                if (iceSpeedY > iceFriction)
+                {
+                    iceSpeedY -= iceFriction;
+                }
+                else if (iceSpeedY < -iceFriction)
+                {
+                    iceSpeedY += iceFriction;
+                }
+                else
+                {
+                    iceSpeedY = 0;
+                }
+            }
+            else if (Mathf.Abs(iceSpeedY) < playerSpeed)
+            {
+                iceSpeedY += y * iceFriction;
+            }
+
+            rigidbody.MovePosition(rigidbody.position + Vector2.right * iceSpeedX + Vector2.up * iceSpeedY);
+        }
     }
 }

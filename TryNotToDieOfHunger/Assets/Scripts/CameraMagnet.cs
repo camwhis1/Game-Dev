@@ -10,13 +10,7 @@ public class CameraMagnet : MonoBehaviour
     float xDist = 0;
     float yDist = 0;
     float lastFrameTime = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (transitionTimer > 0 && cam.transform.position != transform.position)
@@ -43,10 +37,5 @@ public class CameraMagnet : MonoBehaviour
             xDist = transform.position.x - cam.transform.position.x;
             yDist = transform.position.y - cam.transform.position.y;
         }
-    }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-
     }
 }
