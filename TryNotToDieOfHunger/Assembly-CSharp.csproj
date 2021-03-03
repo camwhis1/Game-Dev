@@ -38,6 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraMagnet.cs" />
      <Compile Include="Assets\Scripts\CollectFood.cs" />
+     <Compile Include="Assets\Scripts\Crack_Small.cs" />
      <Compile Include="Assets\Scripts\Floor.cs" />
      <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\LoseHealth.cs" />

@@ -39,13 +39,13 @@ public class Player : MonoBehaviour
         {
             if (Mathf.Abs(x) < 0.5)
             {
-                if (iceSpeedX > iceFriction)
+                if (iceSpeedX > iceFriction * Time.deltaTime)
                 {
-                    iceSpeedX -= iceFriction;
+                    iceSpeedX -= iceFriction * Time.deltaTime;
                 }
-                else if (iceSpeedX < iceFriction * -1)
+                else if (iceSpeedX < iceFriction * Time.deltaTime * -1)
                 {
-                    iceSpeedX += iceFriction;
+                    iceSpeedX += iceFriction * Time.deltaTime;
                 }
                 else
                 {
@@ -54,18 +54,18 @@ public class Player : MonoBehaviour
             }
             else if (Mathf.Abs(iceSpeedX) < playerSpeed)
             {
-                iceSpeedX += x * iceFriction;
+                iceSpeedX += x * iceFriction * Time.deltaTime;
             }
 
             if (Mathf.Abs(y) < 0.5)
             {
-                if (iceSpeedY > iceFriction)
+                if (iceSpeedY > iceFriction * Time.deltaTime)
                 {
-                    iceSpeedY -= iceFriction;
+                    iceSpeedY -= iceFriction * Time.deltaTime;
                 }
-                else if (iceSpeedY < -iceFriction)
+                else if (iceSpeedY < -iceFriction * Time.deltaTime)
                 {
-                    iceSpeedY += iceFriction;
+                    iceSpeedY += iceFriction * Time.deltaTime;
                 }
                 else
                 {
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
             }
             else if (Mathf.Abs(iceSpeedY) < playerSpeed)
             {
-                iceSpeedY += y * iceFriction;
+                iceSpeedY += y * iceFriction * Time.deltaTime;
             }
 
             rigidbody.MovePosition(rigidbody.position + Vector2.right * iceSpeedX + Vector2.up * iceSpeedY);
