@@ -6,22 +6,44 @@ public class Player : MonoBehaviour
 {
     Animator anim;
     Rigidbody2D rigidbody;
+    SpriteRenderer renderer;
     public float playerSpeed = 0.1f;
     public bool isOnIce = false;
 
-    public float iceFriction = 0.0001f;
+    public float iceFriction = 0.05f;
 
     float iceSpeedX = 0;
     float iceSpeedY = 0;
+
+    public HealthBar healthBar;
+
+    Vector2 lastSafePosition = new Vector2(0, 0);
+    float respawnTimer = -1;
+    public float respawnTime = 1;
 
     void Start()
     {
         anim = GetComponent<Animator> ();
         rigidbody = GetComponent<Rigidbody2D>();
+        renderer = GetComponent<SpriteRenderer>();
     }
     
     void Update()
     {
+        if (respawnTimer > -1)
+        {
+            if (respawnTimer > 1)
+            {
+                respawnTimer = -1;
+            }
+            else
+            {
+                respawnTimer += Time.deltaTime;
+            }
+            return;
+        }
+
+        renderer.enabled = true;
         anim.speed = isOnIce ? 3 : 1;
 
         float x = Input.GetAxis("DiscreteHorizontal");
@@ -31,6 +53,7 @@ public class Player : MonoBehaviour
 
         if (!isOnIce)
         {
+            lastSafePosition = rigidbody.position;
             iceSpeedX = 0;
             iceSpeedY = 0;   
             rigidbody.MovePosition(rigidbody.position + Vector2.right * x * playerSpeed + Vector2.up * y * playerSpeed);
@@ -79,5 +102,13 @@ public class Player : MonoBehaviour
 
             rigidbody.MovePosition(rigidbody.position + Vector2.right * iceSpeedX + Vector2.up * iceSpeedY);
         }
+    }
+
+    public void TriggerIceFall()
+    {
+        renderer.enabled = false;
+        healthBar.LoseHealth(3);
+        rigidbody.position = lastSafePosition;
+        respawnTimer = 0;
     }
 }
