@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     public Slider slider;
+    public GmeOvrMainMen gme;
     
     public void SetMaxHealth(int health)
     {
@@ -20,6 +21,17 @@ public class HealthBar : MonoBehaviour
 
     public void LoseHealth(int healthLost)
     {
-        slider.value -= healthLost;
+        if(slider.value != 0)
+        {
+            slider.value -= healthLost;
+        }else{
+            gme.GameOver();
+        }
+        
+    }
+
+    public void FillHealth()
+    {
+        slider.value = slider.maxValue;
     }
 }

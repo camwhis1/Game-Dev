@@ -11,6 +11,6 @@ public class ScoreText : MonoBehaviour
 
     void Update()
     {
-        score.GetComponent<Text>().text = playerScore + "/" + toBeCollected + "Food"; 
+        score.GetComponent<Text>().text = playerScore + "/" + toBeCollected + " Food"; 
     }
 }

@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectFood : MonoBehaviour
-{
-    public AudioSource collectSound;
-    public Player player;
-    
+{   
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(player.name == other.name)
+        if(other.gameObject.tag == "Player")
         {
-            ScoreText.playerScore++;
-            Destroy(gameObject);
+            if(ScoreText.playerScore != ScoreText.toBeCollected)
+            {
+                ScoreText.playerScore++;
+                Destroy(gameObject);
+            }else{
+                
+            }
         }
     }
 
