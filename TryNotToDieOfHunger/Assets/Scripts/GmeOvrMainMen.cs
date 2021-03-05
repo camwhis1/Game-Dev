@@ -33,6 +33,8 @@ public class GmeOvrMainMen : MonoBehaviour
         if(n == 1)
         {
             SceneManager.LoadScene(0);
+            ScoreText.gmeScore = 0;
+            UpdateFood();
         }
         if(n == 2)
         {
@@ -46,9 +48,15 @@ public class GmeOvrMainMen : MonoBehaviour
         if(n == 1)
         {
             SceneManager.LoadScene(0);
+            ScoreText.gmeScore = 0;
+            ClosePanelGme();
+            UpdateFood();
         }
-        ClosePanelGme();
-        OpenPanelMain();
+        if(n == 0)
+        {
+            ClosePanelGme();
+            OpenPanelMain();
+        }
     }
 
     public void OpenPanelGme()
@@ -73,5 +81,11 @@ public class GmeOvrMainMen : MonoBehaviour
     {
         mainMenuPrompt.SetActive(false);
         ResumeGame();
+    }
+
+    public void UpdateFood()
+    {
+        ScoreText.playerScore = 0;
+        ScoreText.toBeCollected = 5;
     }
 }

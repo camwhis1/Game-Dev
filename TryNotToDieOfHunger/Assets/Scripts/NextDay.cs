@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class NextDay : MonoBehaviour
 {
     [SerializeField] GameObject nextDayPanel;
+    public GmeOvrMainMen gmeOvr;
     public HealthBar healthBar;
     
     void Update()
@@ -27,12 +28,18 @@ public class NextDay : MonoBehaviour
 
     public void userClickYesNo(int n) //0==no 1==yes
     {
-       if(n == 1)
-       {
-          UpdateFood();
-          UpdateHealthBar();
-       }
-       ClosePanel();
+        if(n == 1)
+        {
+            if(ScoreText.playerScore == ScoreText.toBeCollected)
+            {
+                ScoreText.gmeScore += 100;
+                UpdateFood();
+                UpdateHealthBar();
+            }else{
+                gmeOvr.OpenPanelGme();
+            }
+        }
+        ClosePanel();
     }
 
     public void OpenPanel()

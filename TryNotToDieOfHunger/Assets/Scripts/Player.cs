@@ -116,6 +116,7 @@ public class Player : MonoBehaviour
 
     public void TriggerIceFall()
     {
+        ScoreText.gmeScore -= 10;
         renderer.enabled = false;
         healthBar.LoseHealth(3);
         rigidbody.position = lastSafePosition;
