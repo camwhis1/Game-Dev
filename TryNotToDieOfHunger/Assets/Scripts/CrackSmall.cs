@@ -6,6 +6,17 @@ public class CrackSmall : MonoBehaviour
 {
     public Player player;
     public CrackLarge crackLargePrefab;
+    
+    AudioSource audio;
+    SpriteRenderer renderer;
+    BoxCollider2D collider;
+
+    void Start()
+    {
+        audio = GetComponent<AudioSource>();
+        renderer = GetComponent<SpriteRenderer>();
+        collider = GetComponent<BoxCollider2D>();
+    }
 
     void OnTriggerExit2D(Collider2D other)
     {
@@ -13,7 +24,9 @@ public class CrackSmall : MonoBehaviour
         {
             CrackLarge crackLarge = Instantiate(crackLargePrefab, transform.position, Quaternion.identity);
             crackLarge.player = player;
-            Destroy(gameObject);
+            audio.Play();
+            renderer.enabled = false;
+            collider.enabled = false;
         }
     }
 }

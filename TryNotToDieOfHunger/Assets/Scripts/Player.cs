@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     SpriteRenderer renderer;
     public float playerSpeed = 0.1f;
     public bool isOnIce = false;
+    public bool isSafe = true;
 
     public float iceFriction = 0.05f;
 
@@ -18,14 +19,18 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
 
     Vector2 lastSafePosition = new Vector2(0, 0);
+
     float respawnTimer = -1;
     public float respawnTime = 1;
+
+    AudioSource[] audio;
 
     void Start()
     {
         anim = GetComponent<Animator> ();
         rigidbody = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
+        audio = GetComponents<AudioSource>();
     }
     
     void Update()
@@ -35,6 +40,7 @@ public class Player : MonoBehaviour
             if (respawnTimer > 1)
             {
                 respawnTimer = -1;
+                audio[2].Play();
             }
             else
             {
@@ -51,9 +57,13 @@ public class Player : MonoBehaviour
         anim.SetFloat("XSpeed", x);
         anim.SetFloat("YSpeed", y);
 
-        if (!isOnIce)
+        if (isSafe)
         {
             lastSafePosition = rigidbody.position;
+        }
+
+        if (!isOnIce)
+        {
             iceSpeedX = 0;
             iceSpeedY = 0;   
             rigidbody.MovePosition(rigidbody.position + Vector2.right * x * playerSpeed + Vector2.up * y * playerSpeed);
@@ -109,6 +119,10 @@ public class Player : MonoBehaviour
         renderer.enabled = false;
         healthBar.LoseHealth(3);
         rigidbody.position = lastSafePosition;
+        iceSpeedX = 0;
+        iceSpeedY = 0;
         respawnTimer = 0;
+        audio[0].Play();
+        audio[1].Play();
     }
 }
