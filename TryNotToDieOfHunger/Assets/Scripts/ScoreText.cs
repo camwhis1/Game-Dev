@@ -7,6 +7,8 @@ public class ScoreText : MonoBehaviour
 {
     public GameObject score; 
     public GameObject gameScore;
+    public GameObject endScore;
+    public static int endSc;
     public static int gmeScore;
     public static int playerScore;
     public static int toBeCollected = 5;    
@@ -15,5 +17,6 @@ public class ScoreText : MonoBehaviour
     {
         score.GetComponent<Text>().text = playerScore + "/" + toBeCollected + " Food";
         gameScore.GetComponent<Text>().text = gmeScore + " Score"; 
+        endScore.GetComponent<Text>().text = "Score: " + endSc;
     }
 }

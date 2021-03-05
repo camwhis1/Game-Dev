@@ -7,6 +7,7 @@ public class GmeOvrMainMen : MonoBehaviour
 {
     [SerializeField] GameObject gameOverPrompt;
     [SerializeField] GameObject mainMenuPrompt;
+    [SerializeField] GameObject winPrompt;
 
     public void GameOver()
     {
@@ -40,7 +41,10 @@ public class GmeOvrMainMen : MonoBehaviour
         {
 
         }
-        ClosePanelMain();
+        if(n == 0)
+        {
+            ClosePanelMain();
+        }
     }
 
     public void UserClickGmeOver(int n) //0==MainMenu 1==Retry
@@ -55,6 +59,21 @@ public class GmeOvrMainMen : MonoBehaviour
         if(n == 0)
         {
             ClosePanelGme();
+            OpenPanelMain();
+        }
+    }
+
+    public void UserClickWin(int n) //0==MainMenu 1==Retry 
+    {
+        if(n == 1)
+        {
+            SceneManager.LoadScene(0);
+            CloseWin();
+            UpdateFood();
+        }
+        if(n == 0)
+        {
+            CloseWin();
             OpenPanelMain();
         }
     }
@@ -80,6 +99,18 @@ public class GmeOvrMainMen : MonoBehaviour
     public void ClosePanelMain()
     {
         mainMenuPrompt.SetActive(false);
+        ResumeGame();
+    }
+
+    public void OpenWin()
+    {
+        winPrompt.SetActive(true);
+        PauseGame();
+    }
+
+    public void CloseWin()
+    {
+        winPrompt.SetActive(false);
         ResumeGame();
     }
 
