@@ -21,7 +21,12 @@ public class Player : MonoBehaviour
     Vector2 lastSafePosition = new Vector2(0, 0);
 
     float respawnTimer = -1;
+    float respawnSparkleTimer = -1;
     public float respawnTime = 1;
+
+    public ParticleSystem waterSplash;
+    public ParticleSystem respawnSparkles;
+
 
     AudioSource[] audio;
 
@@ -35,9 +40,22 @@ public class Player : MonoBehaviour
     
     void Update()
     {
+        if (respawnSparkleTimer > -1)
+        {
+            if (respawnSparkleTimer > respawnTime * 0.9)
+            {
+                Instantiate(respawnSparkles, transform.position, Quaternion.identity);
+                respawnSparkleTimer = -1;
+            }
+            else
+            {
+                respawnSparkleTimer += Time.deltaTime;
+            }
+        }
+
         if (respawnTimer > -1)
         {
-            if (respawnTimer > 1)
+            if (respawnTimer > respawnTime)
             {
                 respawnTimer = -1;
                 audio[2].Play();
@@ -118,12 +136,14 @@ public class Player : MonoBehaviour
     {
         ScoreText.gmeScore -= 10;
         renderer.enabled = false;
-        healthBar.LoseHealth(3);
+        healthBar.LoseHealth(5);
         rigidbody.position = lastSafePosition;
         iceSpeedX = 0;
         iceSpeedY = 0;
         respawnTimer = 0;
+        respawnSparkleTimer = 0;
         audio[0].Play();
         audio[1].Play();
+        Instantiate(waterSplash, transform.position, Quaternion.identity);
     }
 }

@@ -9,6 +9,16 @@ public class NextDay : MonoBehaviour
     [SerializeField] GameObject nextDayPanel;
     public GmeOvrMainMen gmeOvr;
     public HealthBar healthBar;
+    public Image blackCover;
+    Color blackCoverColor;
+
+    bool dayEnding = false;
+    int cutsceneTimer = -1;
+
+    void Start()
+    {
+        blackCoverColor = blackCover.color;
+    }
     
     void Update()
     {
@@ -17,13 +27,53 @@ public class NextDay : MonoBehaviour
            if(SceneManager.GetActiveScene().buildIndex != 0)
            {
                SceneManager.LoadScene(0);
-           }else{
+           }
+           else
+           {
                if(nextDayPanel)
                {
                    OpenPanel();
                }
             }
         }             
+
+        // Day end "cutscene"
+        if (dayEnding)
+        {
+            Time.timeScale = 0;
+            if (cutsceneTimer == -1)
+            {
+                if (healthBar.GetCuurentHealth() > 1)
+                {
+                    healthBar.LoseHealth(1);
+                    ScoreText.gmeScore += 20;
+                }
+                else if (blackCover.color.a < 1)
+                {
+                    blackCover.color = new Color(0, 0, 0, blackCover.color.a + 0.01f);
+                }
+                else
+                {
+                    cutsceneTimer = 0;
+                    healthBar.FillHealth();
+                    ScoreText.toBeCollected += 5;
+                    ScoreText.playerScore = 0;
+                }
+            }
+            else if (cutsceneTimer < 240)
+            {
+                cutsceneTimer++;
+            }
+            else if (blackCover.color.a > 0)
+            {
+                    blackCover.color = new Color(0, 0, 0, blackCover.color.a - 0.01f);
+            }
+            else
+            {
+                dayEnding = false;
+                Time.timeScale = 1;
+            }
+        }
     }
 
     public void userClickYesNo(int n) //0==no 1==yes
@@ -32,10 +82,10 @@ public class NextDay : MonoBehaviour
         {
             if(ScoreText.playerScore == ScoreText.toBeCollected)
             {
-                ScoreText.gmeScore += 100;
-                UpdateFood();
-                UpdateHealthBar();
-            }else{
+                dayEnding = true;
+            }
+            else
+            {
                 gmeOvr.OpenPanelGme();
             }
         }
@@ -53,16 +103,6 @@ public class NextDay : MonoBehaviour
         nextDayPanel.SetActive(false);
         ResumeGame();
     }
-    public void UpdateFood()
-    {
-        ScoreText.playerScore = 0;
-        ScoreText.toBeCollected += 5;
-    }
-
-    public void UpdateHealthBar()
-    {
-        healthBar.FillHealth();
-    } 
 
     void PauseGame()
     {

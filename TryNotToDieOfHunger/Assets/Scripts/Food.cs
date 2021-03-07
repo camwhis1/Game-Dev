@@ -21,7 +21,7 @@ public class Food : MonoBehaviour
         {
             if(ScoreText.playerScore < ScoreText.toBeCollected)
             {
-                ScoreText.gmeScore += 50;
+                ScoreText.gmeScore += 100;
                 ScoreText.playerScore++;
                 audio.Play();
                 // Destroy object without destroying it so audio doesn't stop
