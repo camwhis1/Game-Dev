@@ -71,6 +71,7 @@ public class NextDay : MonoBehaviour
             else
             {
                 dayEnding = false;
+                cutsceneTimer = -1;
                 Time.timeScale = 1;
             }
         }

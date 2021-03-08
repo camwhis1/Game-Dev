@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Button.cs" />
      <Compile Include="Assets\Scripts\CameraMagnet.cs" />
      <Compile Include="Assets\Scripts\CrackLarge.cs" />
      <Compile Include="Assets\Scripts\CrackSmall.cs" />

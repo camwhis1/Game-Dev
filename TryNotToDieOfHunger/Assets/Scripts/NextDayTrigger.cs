@@ -9,13 +9,15 @@ public class NextDayTrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && ScoreText.playerScore == ScoreText.toBeCollected)
         {
-            if(ScoreText.playerScore == 10 && ScoreText.toBeCollected == 10)
+            if(ScoreText.playerScore == 25)
             {
                 ScoreText.endSc = ScoreText.gmeScore;
                 winPrompt.OpenWin();
-            }else{
+            }
+            else
+            {
                 prompt.OpenPanel();
             }
         }
