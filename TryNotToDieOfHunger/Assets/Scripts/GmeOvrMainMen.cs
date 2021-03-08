@@ -8,6 +8,7 @@ public class GmeOvrMainMen : MonoBehaviour
     [SerializeField] GameObject gameOverPrompt;
     [SerializeField] GameObject mainMenuPrompt;
     [SerializeField] GameObject winPrompt;
+    [SerializeField] GameObject helpPrompt;
 
     public void GameOver()
     {
@@ -33,25 +34,27 @@ public class GmeOvrMainMen : MonoBehaviour
     {
         if(n == 1)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
             ScoreText.gmeScore = 0;
             UpdateFood();
         }
         if(n == 2)
         {
-
+            ClosePanelMain();
+            OpenHelp();
         }
         if(n == 0)
         {
             ClosePanelMain();
         }
+        ResumeGame();
     }
 
     public void UserClickGmeOver(int n) //0==MainMenu 1==Retry
     {
         if(n == 1)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
             ScoreText.gmeScore = 0;
             ClosePanelGme();
             UpdateFood();
@@ -67,13 +70,22 @@ public class GmeOvrMainMen : MonoBehaviour
     {
         if(n == 1)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
             CloseWin();
             UpdateFood();
         }
         if(n == 0)
         {
             CloseWin();
+            OpenPanelMain();
+        }
+    }
+
+    public void UserClickHelp(int n) //0==Main Menu 
+    {
+        if(n == 0)
+        {
+            CloseHelp();
             OpenPanelMain();
         }
     }
@@ -92,7 +104,7 @@ public class GmeOvrMainMen : MonoBehaviour
 
     public void OpenPanelMain()
     {
-        mainMenuPrompt.SetActive(true);
+        SceneManager.LoadScene(0);
         PauseGame();
     }
 
@@ -113,6 +125,16 @@ public class GmeOvrMainMen : MonoBehaviour
         winPrompt.SetActive(false);
         ResumeGame();
     }
+
+    public void OpenHelp()
+    {
+        helpPrompt.SetActive(true);
+    }
+
+    public void CloseHelp()
+    {
+        helpPrompt.SetActive(false);
+    }   
 
     public void UpdateFood()
     {

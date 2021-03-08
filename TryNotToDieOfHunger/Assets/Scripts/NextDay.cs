@@ -30,11 +30,11 @@ public class NextDay : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
+        if(Input.GetKeyDown(KeyCode.P))
         {
            if(SceneManager.GetActiveScene().buildIndex != 0)
            {
-               SceneManager.LoadScene(0);
+               gmeOvr.OpenPanelGme();
            }
            else
            {
