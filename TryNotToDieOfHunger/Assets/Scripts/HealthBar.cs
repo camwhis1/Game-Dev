@@ -48,7 +48,7 @@ public class HealthBar : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public int GetCuurentHealth()
+    public int GetCurrentHealth()
     {
         return currentHealth;
     }

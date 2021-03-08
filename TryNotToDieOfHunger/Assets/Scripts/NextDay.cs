@@ -12,12 +12,20 @@ public class NextDay : MonoBehaviour
     public Image blackCover;
     Color blackCoverColor;
 
+    AudioSource bgm;
+    AudioSource sleep;
+    AudioSource scoreCount;
+
     bool dayEnding = false;
-    int cutsceneTimer = -1;
+    bool sleepStarted = false;
 
     void Start()
     {
         blackCoverColor = blackCover.color;
+        AudioSource[] audio = GetComponents<AudioSource>();
+        bgm = audio[0];
+        sleep = audio[1];
+        scoreCount = audio[2];
     }
     
     void Update()
@@ -41,12 +49,13 @@ public class NextDay : MonoBehaviour
         if (dayEnding)
         {
             Time.timeScale = 0;
-            if (cutsceneTimer == -1)
+            if (!sleepStarted)
             {
-                if (healthBar.GetCuurentHealth() > 1)
+                if (healthBar.GetCurrentHealth() > 1)
                 {
                     healthBar.LoseHealth(1);
                     ScoreText.gmeScore += 20;
+                    scoreCount.Play();
                 }
                 else if (blackCover.color.a < 1)
                 {
@@ -54,25 +63,26 @@ public class NextDay : MonoBehaviour
                 }
                 else
                 {
-                    cutsceneTimer = 0;
+                    sleep.Play();
+                    sleepStarted = true;
                     healthBar.FillHealth();
                     ScoreText.toBeCollected += 5;
                     ScoreText.playerScore = 0;
                 }
             }
-            else if (cutsceneTimer < 240)
+            else if (!sleep.isPlaying)
             {
-                cutsceneTimer++;
-            }
-            else if (blackCover.color.a > 0)
-            {
+                if (blackCover.color.a > 0)
+                {
                     blackCover.color = new Color(0, 0, 0, blackCover.color.a - 0.01f);
-            }
-            else
-            {
-                dayEnding = false;
-                cutsceneTimer = -1;
-                Time.timeScale = 1;
+                }
+                else
+                {
+                    dayEnding = false;
+                    sleepStarted = false;
+                    Time.timeScale = 1;
+                    bgm.Play();
+                }
             }
         }
     }
@@ -84,6 +94,7 @@ public class NextDay : MonoBehaviour
             if(ScoreText.playerScore == ScoreText.toBeCollected)
             {
                 dayEnding = true;
+                bgm.Pause();
             }
             else
             {
