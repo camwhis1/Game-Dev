@@ -680,12 +680,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: " - In this game you must collect food in order to survive. \n\n - You
-    can not progress the day until you collect all the food or game over.\n\n - Be
-    careful of the ice and you will slowly lose health due to the extreme cold.\n\n-
-    Falling in ice will lose score and collecting food will add score.\n\n  - The
-    more health you have the more score you get when you progress the day.\n\n -
-    Good Luck!"
+  m_Text: " - In this game you must collect food in order to survive, while you slowly
+    take damage due to the elements. \n\n - You can't progress to the next day until
+    you collect enough food.\n\n - Be careful of the ice, it's slippery!\n\n- Falling
+    in a hole will lose score and collecting food will add score.\n\n  -You also
+    get points for having health left at the end of the day.\n\n - Good Luck!"
 --- !u!222 &887566365
 CanvasRenderer:
   m_ObjectHideFlags: 0

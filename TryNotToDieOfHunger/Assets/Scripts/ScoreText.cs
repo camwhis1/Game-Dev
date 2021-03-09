@@ -9,18 +9,22 @@ public class ScoreText : MonoBehaviour
     public GameObject scoreShadow; 
     public GameObject gameScore;
     public GameObject gameScoreShadow;
+    public GameObject dayCounter;
+    public GameObject dayCounterShadow;
     public GameObject endScore;
     public GameObject returnHomeMessage;
     public GameObject returnHomeMessageShadow;
     public static int endSc;
     public static int gmeScore;
-    public static int playerScore;
-    public static int toBeCollected = 5;    
+    public static int playerScore = 25;
+    public static int toBeCollected = 25;    
 
     Text foodText;
     Text foodTextShadow;
     Text scoreText;
     Text scoreTextShadow;
+    Text dayText;
+    Text dayTextShadow;
     Text endScoreText;
     Text returnHomeText;
     Text returnHomeTextShadow;
@@ -40,6 +44,8 @@ public class ScoreText : MonoBehaviour
         foodTextShadow = scoreShadow.GetComponent<Text>();
         scoreText = gameScore.GetComponent<Text>();
         scoreTextShadow = gameScoreShadow.GetComponent<Text>();
+        dayText = dayCounter.GetComponent<Text>();
+        dayTextShadow = dayCounterShadow.GetComponent<Text>();
         endScoreText = endScore.GetComponent<Text>();
         returnHomeText = returnHomeMessage.GetComponent<Text>();
         returnHomeTextShadow = returnHomeMessageShadow.GetComponent<Text>();
@@ -61,6 +67,7 @@ public class ScoreText : MonoBehaviour
 
         foodText.text = foodTextShadow.text = "Food: " + playerScore + " / " + toBeCollected;
         scoreText.text = scoreTextShadow.text = "Score: " + gmeScore; 
+        dayText.text = dayTextShadow.text = "Day: " + (toBeCollected / 5) + " / 5";
         endScoreText.text = "Score: " + endSc;
 
         if (isComplete)

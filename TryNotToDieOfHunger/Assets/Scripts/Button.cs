@@ -6,7 +6,7 @@ public class Button : MonoBehaviour
 {
     public Sprite buttonDown;
     public GameObject rock;
-    public ParticleSystem explosion;
+    public GameObject explosion;
 
     SpriteRenderer renderer;
     BoxCollider2D collider;
@@ -25,7 +25,7 @@ public class Button : MonoBehaviour
     {
         if (destroyTimer >= 0)
         {
-            if (destroyTimer < 0.5)
+            if (destroyTimer < 0.1)
             {
                 destroyTimer += Time.deltaTime;
             }

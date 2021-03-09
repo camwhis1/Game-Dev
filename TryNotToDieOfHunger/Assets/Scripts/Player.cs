@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class Player : MonoBehaviour
 
     public HealthBar healthBar;
 
+    Vector2 approxCurrentPosition = new Vector2(0, 0);
+    Vector2 approxLastPosition = new Vector2(0, 0);
     Vector2 lastSafePosition = new Vector2(0, 0);
+    float approxPositionTimer = 0;
 
     float respawnTimer = -1;
     float respawnSparkleTimer = -1;
@@ -26,7 +30,6 @@ public class Player : MonoBehaviour
 
     public ParticleSystem waterSplash;
     public ParticleSystem respawnSparkles;
-
 
     AudioSource[] audio;
 
@@ -75,6 +78,26 @@ public class Player : MonoBehaviour
         anim.SetFloat("XSpeed", x);
         anim.SetFloat("YSpeed", y);
 
+        // Approx positions used to check if player is moving or not.
+        // Used because change in pos every frame is sometimes rounded to 0.
+        approxPositionTimer += Time.deltaTime;
+        if (approxPositionTimer > 0.1f)
+        {
+            approxPositionTimer -= 0.1f;
+            approxLastPosition = approxCurrentPosition;
+            approxCurrentPosition = transform.position;
+        }
+
+        // Stop ice speed towards a wall if player is trying to move away from it
+        if (approxCurrentPosition.x == approxLastPosition.x)
+        {
+            iceSpeedX = 0;
+        }
+        if (approxCurrentPosition.y == approxLastPosition.y)
+        {
+            iceSpeedY = 0;
+        }
+
         if (isSafe)
         {
             lastSafePosition = rigidbody.position;
@@ -103,7 +126,7 @@ public class Player : MonoBehaviour
                     iceSpeedX = 0;
                 }
             }
-            else if (Mathf.Abs(iceSpeedX) < playerSpeed)
+            else if (Mathf.Abs(iceSpeedX) < playerSpeed * 2)
             {
                 iceSpeedX += x * iceFriction * Time.deltaTime;
             }
@@ -123,7 +146,7 @@ public class Player : MonoBehaviour
                     iceSpeedY = 0;
                 }
             }
-            else if (Mathf.Abs(iceSpeedY) < playerSpeed)
+            else if (Mathf.Abs(iceSpeedY) < playerSpeed * 2)
             {
                 iceSpeedY += y * iceFriction * Time.deltaTime;
             }

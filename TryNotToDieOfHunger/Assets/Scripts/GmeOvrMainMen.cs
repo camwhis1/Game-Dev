@@ -45,7 +45,7 @@ public class GmeOvrMainMen : MonoBehaviour
         }
         if(n == 0)
         {
-            ClosePanelMain();
+            Application.Quit();
         }
         ResumeGame();
     }
@@ -58,6 +58,7 @@ public class GmeOvrMainMen : MonoBehaviour
             ScoreText.gmeScore = 0;
             ClosePanelGme();
             UpdateFood();
+            ResumeGame();
         }
         if(n == 0)
         {
@@ -73,6 +74,7 @@ public class GmeOvrMainMen : MonoBehaviour
             SceneManager.LoadScene(1);
             CloseWin();
             UpdateFood();
+            ResumeGame();
         }
         if(n == 0)
         {
